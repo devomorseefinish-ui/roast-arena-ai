@@ -31,11 +31,11 @@ const Privacy = () => {
             </CardHeader>
             <CardContent className="space-y-4">
               <p>
-                At <strong>seefinish</strong>, we respect your privacy and are committed to protecting your personal data. 
+                At <strong>SeeFinish</strong>, we respect your privacy and are committed to protecting your personal data. 
                 This privacy policy explains how we collect, use, and safeguard your information when you use our platform.
               </p>
               <p>
-                This policy applies to all users of seefinish, including debaters, judges, audience members, and general social media users.
+                This policy applies to all users of SeeFinish, including debaters, judges, audience members, and general social media users.
               </p>
             </CardContent>
           </Card>
@@ -100,7 +100,7 @@ const Privacy = () => {
               <div>
                 <h4 className="font-semibold mb-2">Platform Operations:</h4>
                 <ul className="list-disc list-inside space-y-1 text-sm">
-                  <li>Provide and maintain seefinish services</li>
+                  <li>Provide and maintain SeeFinish services</li>
                   <li>Process payments and handle financial transactions</li>
                   <li>Create and distribute viral content clips</li>
                   <li>Calculate XP points and distribute rewards</li>
@@ -281,7 +281,7 @@ const Privacy = () => {
                 
                 <h3 className="text-lg font-semibold">Children's Privacy</h3>
                 <p className="text-sm">
-                  seefinish is not intended for users under 13 years old. We do not knowingly 
+                  SeeFinish is not intended for users under 13 years old. We do not knowingly 
                   collect personal information from children under 13.
                 </p>
 
@@ -296,7 +296,7 @@ const Privacy = () => {
                   For privacy-related questions or to exercise your rights, contact us at: <br />
                   Email: privacy@seefinish.com <br />
                   Data Protection Officer: dpo@seefinish.com <br />
-                  Platform: seefinish support system
+                  Platform: SeeFinish support system
                 </p>
               </div>
             </CardContent>

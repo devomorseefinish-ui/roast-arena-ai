@@ -1,8 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Flame, Video, Trophy, Zap, Users, Coins } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
+import { CreateRoast } from "@/components/roasts/CreateRoast";
+import { RoastFeed } from "@/components/roasts/RoastFeed";
+import { CreateDebate } from "@/components/debates/CreateDebate";
+import { DebateFeed } from "@/components/debates/DebateFeed";
 
 const Index = () => {
   const { user } = useAuth();
@@ -21,7 +26,7 @@ const Index = () => {
               <h1 className="text-5xl md:text-7xl font-bold mb-6">
                 Welcome to{" "}
                 <span className="bg-gradient-primary bg-clip-text text-transparent">
-                  seefinish
+                  SeeFinish
                 </span>
               </h1>
               <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
@@ -122,7 +127,7 @@ const Index = () => {
                 <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
                   <Zap className="w-5 h-5 text-white" />
                 </div>
-                <span className="font-bold text-lg">seefinish</span>
+                <span className="font-bold text-lg">SeeFinish</span>
               </div>
               <div className="flex gap-6">
                 <Link to="/terms" className="text-sm hover:text-primary">Terms of Use</Link>
@@ -136,115 +141,30 @@ const Index = () => {
     );
   }
 
-  // Authenticated user dashboard
   return (
-    <div className="container mx-auto p-6">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Welcome back!</h1>
-        <p className="text-muted-foreground">Ready to roast and debate?</p>
-      </div>
+    <div className="min-h-screen bg-gradient-subtle p-4">
+      <div className="max-w-4xl mx-auto">
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold mb-2">Welcome back!</h1>
+          <p className="text-muted-foreground">What's happening in your world today?</p>
+        </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Your XP</CardTitle>
-            <Zap className="h-4 w-4 text-primary" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-primary">1,250</div>
-            <p className="text-xs text-muted-foreground">+20 from yesterday</p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Rank</CardTitle>
-            <Trophy className="h-4 w-4 text-secondary" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-secondary">Rookie</div>
-            <p className="text-xs text-muted-foreground">750 XP to next rank</p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Followers</CardTitle>
-            <Users className="h-4 w-4 text-accent" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-accent">42</div>
-            <p className="text-xs text-muted-foreground">+3 this week</p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Earnings</CardTitle>
-            <Coins className="h-4 w-4 text-success" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-success">₦0</div>
-            <p className="text-xs text-muted-foreground">Start debating to earn!</p>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Quick Actions */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <Card className="cursor-pointer hover:shadow-primary transition-all duration-300">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Flame className="h-5 w-5 text-secondary" />
-              Create a Roast
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-muted-foreground mb-4">
-              Share your funniest roast with the community
-            </p>
-            <Button className="w-full">
-              <Flame className="mr-2 h-4 w-4" />
-              Start Roasting
-            </Button>
-          </CardContent>
-        </Card>
-
-        <Card className="cursor-pointer hover:shadow-secondary transition-all duration-300">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Video className="h-5 w-5 text-accent" />
-              Join a Debate
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-muted-foreground mb-4">
-              Participate in live debates and win prizes
-            </p>
-            <Button variant="outline" className="w-full">
-              <Video className="mr-2 h-4 w-4" />
-              Browse Debates
-            </Button>
-          </CardContent>
-        </Card>
-
-        <Card className="cursor-pointer hover:shadow-success transition-all duration-300">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Trophy className="h-5 w-5 text-success" />
-              View Leaderboard
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-muted-foreground mb-4">
-              See who's dominating the roasting game
-            </p>
-            <Button variant="secondary" className="w-full">
-              <Trophy className="mr-2 h-4 w-4" />
-              View Rankings
-            </Button>
-          </CardContent>
-        </Card>
+        <Tabs defaultValue="roasts" className="space-y-6">
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger value="roasts">Roasts</TabsTrigger>
+            <TabsTrigger value="debates">Debates</TabsTrigger>
+          </TabsList>
+          
+          <TabsContent value="roasts" className="space-y-6">
+            <CreateRoast />
+            <RoastFeed />
+          </TabsContent>
+          
+          <TabsContent value="debates" className="space-y-6">
+            <CreateDebate />
+            <DebateFeed />
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );

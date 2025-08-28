@@ -31,10 +31,10 @@ const Terms = () => {
             </CardHeader>
             <CardContent className="space-y-4">
               <p>
-                Welcome to <strong>seefinish</strong>, a social roasting and debate platform where users can engage in respectful roasting, participate in live debates, follow other users, and earn rewards through our XP system.
+                Welcome to <strong>SeeFinish</strong>, a social roasting and debate platform where users can engage in respectful roasting, participate in live debates, follow other users, and earn rewards through our XP system.
               </p>
               <p>
-                By accessing or using seefinish, you agree to be bound by these Terms of Use and all applicable laws and regulations.
+                By accessing or using SeeFinish, you agree to be bound by these Terms of Use and all applicable laws and regulations.
               </p>
             </CardContent>
           </Card>
@@ -232,7 +232,7 @@ const Terms = () => {
                 <p className="text-sm">
                   For questions about these terms, contact us at: <br />
                   Email: legal@seefinish.com <br />
-                  Platform: seefinish support system
+                  Platform: SeeFinish support system
                 </p>
               </div>
             </CardContent>

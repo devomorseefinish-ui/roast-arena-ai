@@ -32,7 +32,7 @@ export function Layout({ children }: LayoutProps) {
                       <span className="text-white font-bold">S</span>
                     </div>
                     <span className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-                      seefinish
+                      SeeFinish
                     </span>
                   </Link>
                 )}
