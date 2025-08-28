@@ -5,10 +5,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { ConfettiEffect } from "@/components/animations/ConfettiEffect";
 
 export function CreateRoast() {
   const [content, setContent] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
   const { user } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -41,6 +43,7 @@ export function CreateRoast() {
 
       toast.success("Roast created successfully!");
       setContent("");
+      setShowConfetti(true);
     } catch (error) {
       toast.error("An error occurred while creating the roast");
     } finally {
@@ -53,7 +56,7 @@ export function CreateRoast() {
   }
 
   return (
-    <Card>
+    <Card data-tutorial="create-roast">
       <CardHeader>
         <CardTitle>Create a Roast</CardTitle>
       </CardHeader>
@@ -80,6 +83,11 @@ export function CreateRoast() {
           </div>
         </form>
       </CardContent>
+      <ConfettiEffect 
+        trigger={showConfetti} 
+        type="success"
+        onComplete={() => setShowConfetti(false)}
+      />
     </Card>
   );
 }

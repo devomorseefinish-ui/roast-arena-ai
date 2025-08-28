@@ -8,6 +8,7 @@ import { CreateRoast } from "@/components/roasts/CreateRoast";
 import { RoastFeed } from "@/components/roasts/RoastFeed";
 import { CreateDebate } from "@/components/debates/CreateDebate";
 import { DebateFeed } from "@/components/debates/DebateFeed";
+import { WelcomeTutorial } from "@/components/tutorial/WelcomeTutorial";
 
 const Index = () => {
   const { user } = useAuth();
@@ -119,7 +120,7 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Footer Links */}
+            {/* Footer Links */}
         <div className="border-t bg-muted/50">
           <div className="container mx-auto px-4 py-8">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
@@ -130,6 +131,7 @@ const Index = () => {
                 <span className="font-bold text-lg">SeeFinish</span>
               </div>
               <div className="flex gap-6">
+                <Link to="/about" className="text-sm hover:text-primary">About</Link>
                 <Link to="/terms" className="text-sm hover:text-primary">Terms of Use</Link>
                 <Link to="/privacy" className="text-sm hover:text-primary">Privacy Policy</Link>
                 <a href="#" className="text-sm hover:text-primary">Support</a>
@@ -143,6 +145,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-subtle p-4">
+      <WelcomeTutorial />
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold mb-2">Welcome back!</h1>

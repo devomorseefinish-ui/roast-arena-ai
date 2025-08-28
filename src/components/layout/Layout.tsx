@@ -43,6 +43,7 @@ export function Layout({ children }: LayoutProps) {
                   <Input 
                     placeholder="Search roasts, debates, users..." 
                     className="pl-10"
+                    data-tutorial="search"
                   />
                 </div>
               </div>
