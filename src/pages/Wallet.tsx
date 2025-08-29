@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
-import { Wallet as WalletIcon, Copy, ExternalLink, Send, Receipt, TrendingUp } from "lucide-react";
+import { Wallet as WalletIcon, Plus, Send, Receipt, TrendingUp } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { SolanaWalletConnect } from "@/components/wallet/SolanaWalletConnect";
+import { DepositModal } from "@/components/wallet/DepositModal";
 
 interface Transaction {
   id: string;
@@ -20,18 +20,15 @@ interface Transaction {
 }
 
 const Wallet = () => {
-  const [walletAddress, setWalletAddress] = useState("");
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [loading, setLoading] = useState(true);
-  const [connecting, setConnecting] = useState(false);
   const { user, profile } = useAuth();
 
   useEffect(() => {
     if (user) {
-      setWalletAddress(profile?.wallet_address || "");
       fetchTransactions();
     }
-  }, [user, profile]);
+  }, [user]);
 
   const fetchTransactions = async () => {
     try {
@@ -51,33 +48,6 @@ const Wallet = () => {
     }
   };
 
-  const connectWallet = async () => {
-    setConnecting(true);
-    try {
-      // In a real app, this would connect to Solana wallet
-      // For demo purposes, we'll generate a mock address
-      const mockAddress = `${Math.random().toString(36).substring(2, 15)}${Math.random().toString(36).substring(2, 15)}`;
-      
-      const { error } = await supabase
-        .from('profiles')
-        .update({ wallet_address: mockAddress })
-        .eq('user_id', user?.id);
-
-      if (error) throw error;
-
-      setWalletAddress(mockAddress);
-      toast.success('Wallet connected successfully!');
-    } catch (error) {
-      toast.error('Failed to connect wallet');
-    } finally {
-      setConnecting(false);
-    }
-  };
-
-  const copyAddress = () => {
-    navigator.clipboard.writeText(walletAddress);
-    toast.success('Address copied to clipboard');
-  };
 
   const getTransactionTypeIcon = (type: string) => {
     switch (type) {
@@ -126,79 +96,53 @@ const Wallet = () => {
           <p className="text-muted-foreground">Manage your crypto wallet and earnings</p>
         </div>
 
-        {/* Wallet Status */}
-        <Card className="mb-8">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <WalletIcon className="h-5 w-5" />
-              Wallet Status
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            {walletAddress ? (
-              <div className="space-y-4">
-                <div>
-                  <Label>Wallet Address</Label>
-                  <div className="flex items-center gap-2 mt-1">
-                    <Input 
-                      value={walletAddress} 
-                      readOnly 
-                      className="font-mono text-sm"
-                    />
-                    <Button size="sm" variant="outline" onClick={copyAddress}>
-                      <Copy className="h-4 w-4" />
-                    </Button>
-                    <Button size="sm" variant="outline">
-                      <ExternalLink className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <Card>
-                    <CardContent className="p-4 text-center">
-                      <h3 className="text-2xl font-bold text-primary">
-                        ₦{profile?.total_earnings?.toLocaleString() || '0'}
-                      </h3>
-                      <p className="text-sm text-muted-foreground">Total Earnings (NGN)</p>
-                    </CardContent>
-                  </Card>
-                  
-                  <Card>
-                    <CardContent className="p-4 text-center">
-                      <h3 className="text-2xl font-bold text-secondary">0.00 SOL</h3>
-                      <p className="text-sm text-muted-foreground">SOL Balance</p>
-                    </CardContent>
-                  </Card>
-                  
-                  <Card>
-                    <CardContent className="p-4 text-center">
-                      <h3 className="text-2xl font-bold text-success">
-                        {profile?.xp_points?.toLocaleString() || '0'}
-                      </h3>
-                      <p className="text-sm text-muted-foreground">XP Points</p>
-                    </CardContent>
-                  </Card>
-                </div>
-              </div>
-            ) : (
-              <div className="text-center py-8">
-                <WalletIcon className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                <h3 className="text-lg font-semibold mb-2">No Wallet Connected</h3>
-                <p className="text-muted-foreground mb-4">
-                  Connect your Solana wallet to start earning and participating in paid debates
-                </p>
-                <Button 
-                  onClick={connectWallet} 
-                  disabled={connecting}
-                  className="bg-gradient-primary text-white"
-                >
-                  {connecting ? "Connecting..." : "Connect Wallet"}
+        {/* Balance Overview */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <Card>
+            <CardContent className="p-6 text-center">
+              <h3 className="text-3xl font-bold text-primary mb-2">
+                ₦{profile?.total_earnings?.toLocaleString() || '0'}
+              </h3>
+              <p className="text-muted-foreground">Total Earnings (NGN)</p>
+              <DepositModal>
+                <Button className="mt-4 w-full bg-gradient-primary text-white">
+                  <Plus className="mr-2 h-4 w-4" />
+                  Deposit NGN
                 </Button>
-              </div>
-            )}
-          </CardContent>
-        </Card>
+              </DepositModal>
+            </CardContent>
+          </Card>
+          
+          <Card>
+            <CardContent className="p-6 text-center">
+              <h3 className="text-3xl font-bold text-secondary mb-2">0.00 SOL</h3>
+              <p className="text-muted-foreground">SOL Balance</p>
+              <DepositModal>
+                <Button className="mt-4 w-full" variant="outline">
+                  <Plus className="mr-2 h-4 w-4" />
+                  Deposit SOL
+                </Button>
+              </DepositModal>
+            </CardContent>
+          </Card>
+          
+          <Card>
+            <CardContent className="p-6 text-center">
+              <h3 className="text-3xl font-bold text-success mb-2">
+                {profile?.xp_points?.toLocaleString() || '0'}
+              </h3>
+              <p className="text-muted-foreground">XP Points</p>
+              <Button className="mt-4 w-full" variant="outline" disabled>
+                Earn More XP
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Solana Wallet */}
+        <div className="mb-8">
+          <SolanaWalletConnect />
+        </div>
 
         {/* Transaction History */}
         <Card>

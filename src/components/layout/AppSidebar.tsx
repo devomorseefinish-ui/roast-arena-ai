@@ -9,7 +9,8 @@ import {
   Settings, 
   LogOut,
   Wallet,
-  Zap
+  Zap,
+  ShoppingCart
 } from "lucide-react";
 import { NavLink, useLocation } from "react-router-dom";
 import {
@@ -33,6 +34,8 @@ const mainItems = [
   { title: "Home", url: "/", icon: Home },
   { title: "Roasts", url: "/roasts", icon: Flame },
   { title: "Debates", url: "/debates", icon: Video },
+  { title: "Live", url: "/live", icon: Video },
+  { title: "Marketplace", url: "/marketplace", icon: ShoppingCart },
   { title: "Leaderboard", url: "/leaderboard", icon: Trophy },
   { title: "Explore", url: "/explore", icon: Users },
 ];
@@ -67,9 +70,9 @@ export function AppSidebar() {
             <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
               <Zap className="w-5 h-5 text-white" />
             </div>
-            {!open && (
+{open && (
               <span className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-                seefinish
+                SeeFinish
               </span>
             )}
           </div>
@@ -88,7 +91,7 @@ export function AppSidebar() {
                       className={getNavCls(item.url)}
                     >
                       <item.icon className="mr-2 h-4 w-4" />
-                      {!open && <span>{item.title}</span>}
+                      {open && <span>{item.title}</span>}
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -111,7 +114,7 @@ export function AppSidebar() {
                         className={getNavCls(item.url)}
                       >
                         <item.icon className="mr-2 h-4 w-4" />
-                        {!open && <span>{item.title}</span>}
+                        {open && <span>{item.title}</span>}
                       </NavLink>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -126,7 +129,7 @@ export function AppSidebar() {
       {user && (
         <SidebarFooter>
           <div className="p-4 border-t">
-            {!open ? (
+            {open ? (
               <div className="space-y-3">
                 <div className="flex items-center gap-3">
                   <Avatar className="h-8 w-8">

@@ -20,6 +20,9 @@ import Notifications from "./pages/Notifications";
 import Wallet from "./pages/Wallet";
 import Settings from "./pages/Settings";
 import About from "./pages/About";
+import Profile from "./pages/Profile";
+import Marketplace from "./pages/Marketplace";
+import Live from "./pages/Live";
 
 const queryClient = new QueryClient();
 
@@ -40,10 +43,13 @@ const App = () => (
                   <Route path="/debates" element={<Debates />} />
                   <Route path="/leaderboard" element={<Leaderboard />} />
                   <Route path="/explore" element={<Explore />} />
+                  <Route path="/live" element={<Live />} />
+                  <Route path="/marketplace" element={<Marketplace />} />
                   <Route path="/notifications" element={<Notifications />} />
                   <Route path="/wallet" element={<Wallet />} />
                   <Route path="/settings" element={<Settings />} />
                   <Route path="/about" element={<About />} />
+                  <Route path="/profile/:username" element={<Profile />} />
                   <Route path="/terms" element={<Terms />} />
                   <Route path="/privacy" element={<Privacy />} />
                   {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

@@ -38,11 +38,11 @@ export function Layout({ children }: LayoutProps) {
                 )}
                 
                 {/* Search Bar */}
-                <div className="relative max-w-md w-full">
+                <div className="relative max-w-md w-full hidden md:block">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
                   <Input 
                     placeholder="Search roasts, debates, users..." 
-                    className="pl-10"
+                    className="pl-10 bg-muted/50 border-0 focus:bg-background transition-colors"
                     data-tutorial="search"
                   />
                 </div>
@@ -50,18 +50,21 @@ export function Layout({ children }: LayoutProps) {
 
               <div className="flex items-center gap-2">
                 {user && (
-                  <Button variant="ghost" size="icon">
-                    <Bell className="h-4 w-4" />
-                  </Button>
+                  <Link to="/notifications">
+                    <Button variant="ghost" size="icon" className="relative">
+                      <Bell className="h-4 w-4" />
+                      <span className="absolute -top-1 -right-1 h-2 w-2 bg-primary rounded-full"></span>
+                    </Button>
+                  </Link>
                 )}
                 <ThemeToggle />
                 {!user && (
                   <div className="flex items-center gap-2">
                     <Link to="/auth">
-                      <Button variant="outline">Sign In</Button>
+                      <Button variant="outline" size="sm">Sign In</Button>
                     </Link>
                     <Link to="/auth?tab=signup">
-                      <Button>Sign Up</Button>
+                      <Button size="sm" className="bg-gradient-primary text-white">Sign Up</Button>
                     </Link>
                   </div>
                 )}
