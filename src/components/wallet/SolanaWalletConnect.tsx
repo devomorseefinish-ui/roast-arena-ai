@@ -54,17 +54,20 @@ export function SolanaWalletConnect() {
       setWalletAddress(address);
       setIsConnected(true);
       
-      // Update profile with wallet address
-      const { error } = await supabase
-        .from('profiles')
-        .update({ wallet_address: address })
-        .eq('user_id', user?.id);
+      // Update profile with wallet address if user is logged in
+      if (user?.id) {
+        const { error } = await supabase
+          .from('profiles')
+          .update({ wallet_address: address })
+          .eq('user_id', user.id);
 
-      if (error) throw error;
+        if (error) throw error;
+      }
 
       await fetchBalance(address);
       toast.success('Wallet connected successfully!');
     } catch (error) {
+      console.error('Wallet connection error:', error);
       toast.error('Failed to connect wallet');
     } finally {
       setConnecting(false);
@@ -92,9 +95,16 @@ export function SolanaWalletConnect() {
 
   const fetchBalance = async (address: string) => {
     try {
-      // Mock balance fetch - in real app, use Solana RPC
-      const mockBalance = Math.random() * 10;
-      setBalance(mockBalance);
+      // TODO: Replace with real Solana RPC call
+      // For now, using mock data with more realistic values
+      const savedBalance = localStorage.getItem(`sol_balance_${address}`);
+      if (savedBalance) {
+        setBalance(parseFloat(savedBalance));
+      } else {
+        const mockBalance = Math.random() * 5 + 0.5; // 0.5 to 5.5 SOL
+        localStorage.setItem(`sol_balance_${address}`, mockBalance.toString());
+        setBalance(mockBalance);
+      }
     } catch (error) {
       console.error('Failed to fetch balance:', error);
     }

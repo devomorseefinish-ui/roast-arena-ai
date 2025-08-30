@@ -2,9 +2,9 @@ import { ReactNode } from "react";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "./AppSidebar";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
+import { SearchBar } from "@/components/search/SearchBar";
 import { Button } from "@/components/ui/button";
-import { Bell, Search } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import { Bell } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { Link } from "react-router-dom";
 
@@ -39,12 +39,7 @@ export function Layout({ children }: LayoutProps) {
                 
                 {/* Search Bar */}
                 <div className="relative max-w-md w-full hidden md:block">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-                  <Input 
-                    placeholder="Search roasts, debates, users..." 
-                    className="pl-10 bg-muted/50 border-0 focus:bg-background transition-colors"
-                    data-tutorial="search"
-                  />
+                  <SearchBar />
                 </div>
               </div>
 

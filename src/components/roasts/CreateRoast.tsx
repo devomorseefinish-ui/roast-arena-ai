@@ -2,13 +2,16 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Send } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { ConfettiEffect } from "@/components/animations/ConfettiEffect";
+import { ImageUpload } from "@/components/upload/ImageUpload";
 
 export function CreateRoast() {
   const [content, setContent] = useState("");
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
   const { user } = useAuth();
@@ -34,6 +37,7 @@ export function CreateRoast() {
         .insert({
           content: content.trim(),
           author_id: user.id,
+          media_url: imageUrl
         });
 
       if (error) {
@@ -43,6 +47,7 @@ export function CreateRoast() {
 
       toast.success("Roast created successfully!");
       setContent("");
+      setImageUrl(null);
       setShowConfetti(true);
     } catch (error) {
       toast.error("An error occurred while creating the roast");
@@ -63,21 +68,29 @@ export function CreateRoast() {
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
           <Textarea
-            placeholder="What's on your mind? Roast someone or something..."
+            placeholder="What's the hottest roast you've got? 🔥"
             value={content}
             onChange={(e) => setContent(e.target.value)}
             className="min-h-[120px] resize-none"
-            maxLength={500}
+            maxLength={280}
+            data-tutorial="create-roast"
           />
+          
+          <ImageUpload 
+            onImageUploaded={setImageUrl}
+            className="mt-3"
+          />
+          
           <div className="flex justify-between items-center">
             <span className="text-sm text-muted-foreground">
-              {content.length}/500 characters
+              {content.length}/280 characters
             </span>
             <Button 
               type="submit" 
               disabled={isSubmitting || !content.trim()}
               className="bg-gradient-primary text-white"
             >
+              <Send className="h-4 w-4 mr-2" />
               {isSubmitting ? "Posting..." : "Post Roast"}
             </Button>
           </div>
