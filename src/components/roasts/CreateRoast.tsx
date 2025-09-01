@@ -36,8 +36,7 @@ export function CreateRoast() {
         .from("roasts")
         .insert({
           content: content.trim(),
-          author_id: user.id,
-          media_url: imageUrl
+          author_id: user.id
         });
 
       if (error) {

@@ -162,6 +162,14 @@ export default function Auth() {
                   <Mail className="mr-2 h-4 w-4" />
                   {loading ? 'Creating account...' : 'Create Account'}
                 </Button>
+                <div className="text-xs text-muted-foreground text-center mt-2">
+                  After signing up, check your email for the OTP. Quick links:
+                  <div className="mt-1 flex items-center justify-center gap-3">
+                    <a className="text-primary hover:underline" href="https://mail.google.com" target="_blank" rel="noreferrer">Gmail</a>
+                    <a className="text-primary hover:underline" href="https://outlook.live.com/mail/0/inbox" target="_blank" rel="noreferrer">Outlook</a>
+                    <a className="text-primary hover:underline" href="https://mail.yahoo.com" target="_blank" rel="noreferrer">Yahoo</a>
+                  </div>
+                </div>
               </form>
             </TabsContent>
           </Tabs>

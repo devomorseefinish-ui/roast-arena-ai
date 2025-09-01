@@ -47,7 +47,7 @@ const userItems = [
 ];
 
 export function AppSidebar() {
-  const { open } = useSidebar();
+  const { open, setOpen, setOpenMobile } = useSidebar();
   const location = useLocation();
   const { user, profile, signOut } = useAuth();
   const currentPath = location.pathname;
@@ -89,6 +89,7 @@ export function AppSidebar() {
                     <NavLink 
                       to={item.url} 
                       className={getNavCls(item.url)}
+                      onClick={() => { setOpen(false); setOpenMobile(false); }}
                     >
                       <item.icon className="mr-2 h-4 w-4" />
                       {open && <span>{item.title}</span>}
@@ -109,13 +110,14 @@ export function AppSidebar() {
                 {userItems.map((item) => (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton asChild>
-                      <NavLink 
-                        to={item.url} 
-                        className={getNavCls(item.url)}
-                      >
-                        <item.icon className="mr-2 h-4 w-4" />
-                        {open && <span>{item.title}</span>}
-                      </NavLink>
+                        <NavLink 
+                          to={item.url} 
+                          className={getNavCls(item.url)}
+                          onClick={() => { setOpen(false); setOpenMobile(false); }}
+                        >
+                          <item.icon className="mr-2 h-4 w-4" />
+                          {open && <span>{item.title}</span>}
+                        </NavLink>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 ))}
