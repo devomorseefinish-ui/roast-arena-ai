@@ -108,12 +108,24 @@ export function DebateCard({ debate, participantCount = 0 }: DebateCardProps) {
           <div className="flex gap-2 pt-2">
             <Button 
               size="sm" 
-              className="flex-1 bg-gradient-primary text-white"
-              disabled={debate.status !== 'scheduled' || participantCount >= debate.max_participants}
+              className="flex-1 bg-gradient-primary text-white hover:opacity-90"
+              disabled={debate.status !== 'scheduled' && debate.status !== 'live'}
+              onClick={() => {
+                if (debate.status === 'scheduled' || debate.status === 'live') {
+                  // Navigate to debate room
+                  window.location.href = `/debates/${debate.id}`;
+                }
+              }}
             >
-              {debate.status === 'scheduled' ? 'Join Debate' : 'View Debate'}
+              {debate.status === 'scheduled' ? 'Join Debate' : 
+               debate.status === 'live' ? '🔴 Join Live' : 
+               'View Results'}
             </Button>
-            <Button variant="outline" size="sm">
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={() => window.location.href = `/debates/${debate.id}/details`}
+            >
               Details
             </Button>
           </div>

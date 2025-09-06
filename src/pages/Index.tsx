@@ -147,9 +147,55 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-subtle p-4">
       <WelcomeTutorial />
       <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold mb-2">Welcome back!</h1>
-          <p className="text-muted-foreground">What's happening in your world today?</p>
+        <div className="mb-8">
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <h1 className="text-3xl font-bold mb-2">🔥 Trending Now</h1>
+              <p className="text-muted-foreground">The hottest roasts and debates from your community</p>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                <Users className="w-4 h-4" />
+                <span>10.2k active</span>
+              </div>
+              <div className="w-2 h-2 bg-success rounded-full animate-live-pulse"></div>
+            </div>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-transparent">
+              <CardContent className="p-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <Flame className="w-5 h-5 text-secondary" />
+                  <span className="font-semibold text-secondary">Hot Roasts</span>
+                </div>
+                <p className="text-2xl font-bold">247</p>
+                <p className="text-xs text-muted-foreground">+12 this hour</p>
+              </CardContent>
+            </Card>
+            
+            <Card className="border-accent/20 bg-gradient-to-br from-accent/5 to-transparent">
+              <CardContent className="p-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <Video className="w-5 h-5 text-accent" />
+                  <span className="font-semibold text-accent">Live Debates</span>
+                </div>
+                <p className="text-2xl font-bold">5</p>
+                <p className="text-xs text-muted-foreground">Join now!</p>
+              </CardContent>
+            </Card>
+            
+            <Card className="border-success/20 bg-gradient-to-br from-success/5 to-transparent">
+              <CardContent className="p-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <Coins className="w-5 h-5 text-success" />
+                  <span className="font-semibold text-success">Payouts</span>
+                </div>
+                <p className="text-2xl font-bold">₦25k</p>
+                <p className="text-xs text-muted-foreground">Today's total</p>
+              </CardContent>
+            </Card>
+          </div>
         </div>
 
         <Tabs defaultValue="roasts" className="space-y-6">

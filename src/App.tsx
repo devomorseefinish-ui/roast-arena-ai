@@ -14,6 +14,7 @@ import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
 import Roasts from "./pages/Roasts";
 import Debates from "./pages/Debates";
+import DebateRoom from "./pages/DebateRoom";
 import Leaderboard from "./pages/Leaderboard";
 import Explore from "./pages/Explore";
 import Notifications from "./pages/Notifications";
@@ -41,6 +42,7 @@ const App = () => (
                   <Route path="/auth" element={<Auth />} />
                   <Route path="/roasts" element={<Roasts />} />
                   <Route path="/debates" element={<Debates />} />
+                  <Route path="/debates/:id" element={<DebateRoom />} />
                   <Route path="/leaderboard" element={<Leaderboard />} />
                   <Route path="/explore" element={<Explore />} />
                   <Route path="/live" element={<Live />} />
