@@ -466,7 +466,35 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      debate_participants_public: {
+        Row: {
+          avatar_url: string | null
+          debate_id: string | null
+          display_name: string | null
+          id: string | null
+          joined_at: string | null
+          role: string | null
+          team: string | null
+          user_id: string | null
+          username: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "debate_participants_debate_id_fkey"
+            columns: ["debate_id"]
+            isOneToOne: false
+            referencedRelation: "debates"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "debate_participants_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
     }
     Functions: {
       [_ in never]: never

@@ -50,7 +50,7 @@ export function DebateFeed() {
       if (data) {
         const debateIds = data.map(debate => debate.id);
         const { data: participants } = await supabase
-          .from("debate_participants")
+          .from("debate_participants_public")
           .select("debate_id")
           .in("debate_id", debateIds);
 
